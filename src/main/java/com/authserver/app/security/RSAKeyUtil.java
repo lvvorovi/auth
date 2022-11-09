@@ -1,4 +1,4 @@
-package com.meawallet.authserver.security;
+package com.authserver.app.security;
 
 import com.nimbusds.jose.jwk.RSAKey;
 import org.springframework.scheduling.annotation.Async;
