@@ -3,6 +3,7 @@ package com.authserver.app.security;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
+import org.springframework.security.oauth2.core.oidc.OidcScopes;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
 import org.springframework.stereotype.Component;
@@ -46,7 +47,7 @@ public class RegisteredClientRepo implements RegisteredClientRepository {
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                 .authorizationGrantType(AUTHORIZATION_CODE)
                 .authorizationGrantType(CLIENT_CREDENTIALS)
-                .scope("openid")
+                .scope(OidcScopes.OPENID)
                 .scope("books_read")
                 .redirectUri("http://127.0.0.1:3000/authorized")
                 .build();

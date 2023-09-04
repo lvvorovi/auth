@@ -2,6 +2,8 @@ package com.authserver.app.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -19,16 +21,9 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .cors().disable()
-                .csrf().disable()
-                .formLogin();
+                .formLogin(Customizer.withDefaults())
+                .authorizeHttpRequests( h -> h.anyRequest().authenticated());
 
-        http.oauth2ResourceServer(
-                        oauth2ResourceServerCustomizer ->
-                                oauth2ResourceServerCustomizer.jwt().jwkSetUri("http://172.26.0.1:9090/oauth2.jwks")
-                )
-                .authorizeRequests()
-                .anyRequest().permitAll();
 
         return http.build();
     }
